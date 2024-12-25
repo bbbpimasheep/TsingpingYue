@@ -5,6 +5,8 @@ import (
 	"Serenesongserver/models"
 	"context"
 	"fmt"
+	"image/jpeg"
+	"image/png"
 	"strings"
 
 	"bytes"
@@ -231,6 +233,28 @@ func GenerateAndDownloadImage() error {
 	}
 
 	RecommendedPicPath = filepath.Join(config.PicFolder, fmt.Sprintf("image_%s_0.png", taskID))
+
+	// 6. 压缩
+	imgFile, err := os.Open(RecommendedPicPath)
+	if err != nil {
+		return err
+	}
+	defer imgFile.Close()
+	imgContent, err := png.Decode(imgFile)
+	if err != nil {
+		return err
+	}
+	jpegFile, err := os.Create(RecommendedPicPath + ".jpg")
+	if err != nil {
+		return err
+	}
+	defer jpegFile.Close()
+	options := jpeg.Options{Quality: 80}
+	if err := jpeg.Encode(jpegFile, imgContent, &options); err != nil {
+		return err
+	}
+
+	RecommendedPicPath = RecommendedPicPath + jpegFile.Name()
 
 	return nil
 }
