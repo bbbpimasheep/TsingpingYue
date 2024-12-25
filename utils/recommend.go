@@ -254,7 +254,7 @@ func GenerateAndDownloadImage() error {
 		return err
 	}
 
-	RecommendedPicPath = RecommendedPicPath + jpegFile.Name()
+	RecommendedPicPath = jpegFile.Name()
 
 	return nil
 }
