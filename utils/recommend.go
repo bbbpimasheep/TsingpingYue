@@ -244,7 +244,8 @@ func GenerateAndDownloadImage() error {
 	if err != nil {
 		return err
 	}
-	jpegFile, err := os.Create(RecommendedPicPath + ".jpg")
+	jpegFilePath := filepath.Join(config.PicFolder, fmt.Sprintf("image_%s_0.jpg", taskID))
+	jpegFile, err := os.Create(jpegFilePath)
 	if err != nil {
 		return err
 	}
