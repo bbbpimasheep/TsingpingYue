@@ -12,6 +12,10 @@ COPY . .
 # 下载 Go 依赖
 RUN go mod download
 
+# 创建临时目录
+RUN mkdir -p /tmp/pic && chmod -R 755 /tmp/pic
+
+# 复制图片到临时目录
 RUN cp static/avatar.png /tmp
 
 # 暴露应用端口，假设 Gin 默认运行在 8080 端口
