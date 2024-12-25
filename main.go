@@ -11,6 +11,8 @@ func main() {
 	config.LoadEnv()
 	utils.SetupCronJobs()
 
+	gin.SetMode(gin.ReleaseMode)
+
 	router := gin.Default()
 
 	// Login related APIs
@@ -33,6 +35,7 @@ func main() {
 
 	// Searching related APIs
 	router.GET("/search", controllers.SearchRouter)
+
 	// Composing related APIs
 	router.GET("/getRhymes", controllers.GetRhymes)
 	router.GET("/getYunshu", controllers.GetYunshu)
@@ -44,6 +47,7 @@ func main() {
 	router.POST("/modifyWork", controllers.ModifyWork)
 	router.GET("/getMyWorks", controllers.GetMyWorks)
 	router.GET("/getCiById", controllers.GetCiById)
+
 	// User info related APIs
 	router.POST("/saveUserInfo", controllers.SaveUserInfo)
 	router.POST("/changePrivacy", controllers.ChangePrivacy)
@@ -56,6 +60,7 @@ func main() {
 	router.GET("/getUserInfo", controllers.GetUserInfo)
 	router.GET("/getPersonalID", controllers.GetPersonalID)
 	router.GET("/getUserInfoText", controllers.GetUserInfoText)
+
 	// Community related APIs
 	router.POST("/publishDynamic", controllers.PublishDynamic)
 	router.POST("/commentPost", controllers.CommentPost)
